@@ -1,0 +1,66 @@
+run:
+  name: aaec_flan_t5_base_1gpu
+  seed: 42
+
+dataset:
+  dataset_name: essay
+  source_type: conll
+  source_dir: ../am_datasets/conll/Essay_Level
+
+prepared_data:
+  output_format: tanl
+  fulltext: false
+
+model:
+  base_model: google/flan-t5-base
+  adapter:
+    enabled: true
+    type: lora
+    r: 16
+    alpha: 32
+    dropout: 0.05
+  quantization:
+    mode: none
+
+train:
+  max_seq_length: 1024
+  max_steps: 10000
+  save_steps: 500
+  learning_rate: 5.0e-4
+  per_device_train_batch_size: 8
+  per_device_eval_batch_size: 8
+  gradient_accumulation_steps: 1
+  bf16: true
+  gpu:
+    num_gpus: 1
+
+checkpoint_selection:
+  enabled: true
+  split: dev
+  mode: all
+  metric: average_f1
+  decode:
+    batch_size: 32
+    max_length: 1024
+    num_beams: 1
+    temperature: 0.0
+    do_sample: false
+    gpu:
+      num_gpus: 1
+
+annotation:
+  split: test
+  decode:
+    batch_size: 32
+    max_length: 1024
+    num_beams: 1
+    temperature: 0.0
+    do_sample: false
+    gpu:
+      num_gpus: 1
+
+evaluation:
+  output_format: tanl
+
+outputs:
+  root_dir: ../outputs

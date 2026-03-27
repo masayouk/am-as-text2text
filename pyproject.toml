@@ -1,0 +1,48 @@
+[project]
+name = "am-as-text2text"
+version = "0.1.0"
+description = "Standalone argument mining text-to-text annotator pipeline"
+readme = "README.md"
+license = "CC-BY-NC-SA-4.0 AND Apache-2.0"
+license-files = [
+    "LICENSE",
+    "LICENSES/CC-BY-NC-SA-4.0.txt",
+    "LICENSES/Apache-2.0.txt",
+    "THIRD_PARTY_NOTICES.md",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "accelerate>=1.8.0",
+    "bitsandbytes>=0.48.0",
+    "deepspeed>=0.17.0",
+    "numpy>=2.0.0",
+    "peft>=0.15.2",
+    "pydantic>=2.10.0",
+    "pyyaml>=6.0.2",
+    "sentencepiece>=0.2.0",
+    "spacy>=3.8.0",
+    "torch>=2.7.0",
+    "transformers>=4.53.1",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.4.1",
+    "ruff>=0.12.0",
+]
+
+[project.scripts]
+am-text2text = "am_text2text.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/am_text2text"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100

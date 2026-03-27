@@ -1,0 +1,69 @@
+run:
+  name: abstrct_flan_t5_xxl_8gpu_deepspeed
+  seed: 42
+
+dataset:
+  dataset_name: abstrct
+  source_type: mrp
+  source_dir: ../am_datasets/mrp/abstrct
+
+prepared_data:
+  output_format: tanl
+  fulltext: false
+
+model:
+  base_model: google/flan-t5-xxl
+  adapter:
+    enabled: true
+    type: lora
+    r: 16
+    alpha: 32
+    dropout: 0.05
+  quantization:
+    mode: none
+
+train:
+  max_seq_length: 1024
+  max_steps: 10000
+  save_steps: 500
+  learning_rate: 2.0e-4
+  per_device_train_batch_size: 1
+  per_device_eval_batch_size: 1
+  gradient_accumulation_steps: 1
+  bf16: true
+  gpu:
+    num_gpus: 8
+  deepspeed:
+    enabled: true
+    config_path: ./deepspeed_zero2.json
+
+checkpoint_selection:
+  enabled: true
+  split: dev
+  mode: all
+  metric: average_f1
+  decode:
+    batch_size: 32
+    max_length: 1024
+    num_beams: 1
+    temperature: 0.0
+    do_sample: false
+    gpu:
+      num_gpus: 1
+
+annotation:
+  split: test
+  decode:
+    batch_size: 32
+    max_length: 1024
+    num_beams: 1
+    temperature: 0.0
+    do_sample: false
+    gpu:
+      num_gpus: 1
+
+evaluation:
+  output_format: tanl
+
+outputs:
+  root_dir: ../outputs

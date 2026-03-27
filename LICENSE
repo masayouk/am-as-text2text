@@ -1,0 +1,36 @@
+Repository License Notice
+
+This repository contains materials under multiple licenses.
+
+Unless otherwise noted in a file header or in `THIRD_PARTY_NOTICES.md`, the
+original code and documentation authored for this repository are licensed under
+the Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International
+license (`CC BY-NC-SA 4.0`).
+
+You should read the full license text before using, sharing, or adapting those
+materials:
+
+- Local copy: `LICENSES/CC-BY-NC-SA-4.0.txt`
+- Official URL: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Third-party or separately noted materials remain under their own license terms.
+Known cases include:
+
+- `src/am_text2text/evaluation/upstream/aaec_acl2017/docReader.py`
+- `src/am_text2text/evaluation/upstream/aaec_acl2017/eval_component.py`
+- `src/am_text2text/evaluation/upstream/aaec_acl2017/eval_relation.py`
+- `src/am_text2text/evaluation/upstream/aaec_acl2017/eval_span.py`
+
+These files are Python 3 reimplementations of upstream evaluation code released
+under Apache License 2.0. A local copy of Apache 2.0 is provided in
+`LICENSES/Apache-2.0.txt`.
+
+- `src/am_text2text/evaluation/upstream/graph_parser_scorer/scorer.py`
+
+This file carries separate provenance notes and should be treated according to
+the notice in the file header and in `THIRD_PARTY_NOTICES.md`.
+
+Earlier releases of this repository that were distributed under Apache License
+2.0 remain available under those earlier terms.
+
+For additional provenance and license notes, see `THIRD_PARTY_NOTICES.md`.
